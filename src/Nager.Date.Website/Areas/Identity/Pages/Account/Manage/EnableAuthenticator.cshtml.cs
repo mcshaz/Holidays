@@ -125,18 +125,18 @@ namespace Nager.Date.Website.Areas.Identity.Pages.Account.Manage
             AuthenticatorUri = GenerateQrCodeUri(email, unformattedKey);
         }
 
-        private string FormatKey(string unformattedKey)
+        private static string FormatKey(string unformattedKey)
         {
             var result = new StringBuilder();
             var currentPosition = 0;
             while (currentPosition + 4 < unformattedKey.Length)
             {
-                result.Append(unformattedKey.Substring(currentPosition, 4)).Append(" ");
+                result.Append(unformattedKey.Substring(currentPosition, 4)).Append(' ');
                 currentPosition += 4;
             }
             if (currentPosition < unformattedKey.Length)
             {
-                result.Append(unformattedKey.Substring(currentPosition));
+                result.Append(unformattedKey[currentPosition..]);
             }
 
             return result.ToString().ToLowerInvariant();
@@ -146,7 +146,7 @@ namespace Nager.Date.Website.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("Nager.Date"),
+                _urlEncoder.Encode("holidays.mcshaz"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

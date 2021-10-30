@@ -83,6 +83,10 @@ namespace Nager.Date.Website.Controllers
             return View(regionStatistic);
         }
 
+        public IActionResult PrivacyPolicy()
+        {
+            return View();
+        }
         public IActionResult Api()
         {
             return RedirectPermanent("/Api");

@@ -1,4 +1,3 @@
-using AspNetCoreRateLimit;
 using Mapster;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -74,25 +73,6 @@ namespace Nager.Date.Website
 
             #endregion
 
-            #region IpRateLimit
-
-            services.AddOptions();
-            services.AddMemoryCache();
-
-            //load general configuration from appsettings.json
-            services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
-
-            //load specific IP policies not covered above in "IpRateLimiting" section of config
-            //currently unused
-            services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
-
-            // inject counter and rules stores
-            services.AddInMemoryRateLimiting();
-
-            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
-
-            #endregion
-
             services.AddResponseCompression(options =>
             {
                 options.Providers.Add<GzipCompressionProvider>();
@@ -138,6 +118,27 @@ namespace Nager.Date.Website
 
                 c.TagActionsBy(api => new[] { api.GroupName });
                 c.DocInclusionPredicate((name, api) => true);
+                c.AddSecurityDefinition("query_api_key", new OpenApiSecurityScheme {
+                    Type = SecuritySchemeType.ApiKey,
+                    Name = "api_key",
+                    In = ParameterLocation.Query
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "query_api_key"
+                            },
+                            Name = "query_api_key",
+                            In = ParameterLocation.Query,
+                        },
+                        Array.Empty<string>()
+                    }
+                });
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -164,21 +165,16 @@ namespace Nager.Date.Website
             var enableSwaggerMode = Configuration.GetValue<bool>("EnableSwaggerMode");
 
             app.UseForwardedHeaders();
-            if (env.IsDevelopment())
-            {
+            // if (env.IsDevelopment())
+            // {
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
-
-            if (enableIpRateLimiting)
-            {
-                app.UseIpRateLimiting();
-            }
+            // }
+            // else
+            // {
+            //    app.UseExceptionHandler("/Home/Error");
+            //    app.UseHsts();
+            // }
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -208,7 +204,7 @@ namespace Nager.Date.Website
                         const int DurationInSeconds = 60 * 60 * 24 * CacheDays;
                         ctx.Context.Response.Headers[HeaderNames.CacheControl] = $"public,max-age={DurationInSeconds}";
                         ctx.Context.Response.Headers[HeaderNames.Expires] = new[] { DateTime.UtcNow.AddDays(CacheDays).ToString("R") }; // Format RFC1123
-                }
+                    }
                 });
             }
 

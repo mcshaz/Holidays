@@ -12,7 +12,4 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Nager.Date\Nager.Date.csproj" />
-  </ItemGroup>
 </Project>

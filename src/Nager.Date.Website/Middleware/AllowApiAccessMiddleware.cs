@@ -64,7 +64,7 @@ namespace Nager.Date.Website.Middleware
                 var authority = new Uri(origin.ToString().ToLowerInvariant()).Authority;
                 
                 var currentAuthority = this._isDev ? "localhost:44389"
-                                                :"date.nager.at";
+                                                : "holidays.mcshaz.com";
         
                 if (authority == currentAuthority &&
                     httpContext.Session.TryGetDateTime(MvcPageRequestedKey, out var timestamp))

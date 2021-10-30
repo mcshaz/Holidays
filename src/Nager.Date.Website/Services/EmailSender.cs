@@ -24,7 +24,7 @@ namespace Nager.Date.Website.Services
         {
             var client = new SendGridClient(apiKey);
             var msg = MailHelper.CreateSingleEmail(
-                from: new EmailAddress("brent@focused-light.net", "Nager.Date membership"),
+                from: new EmailAddress("admin@holidays.mcshaz.com", "holidays.mcshaz.com Membership"),
                 to: new EmailAddress(email),
                 subject: subject,
                 plainTextContent: message,

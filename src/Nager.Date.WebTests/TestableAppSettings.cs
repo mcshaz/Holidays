@@ -1,4 +1,4 @@
-using AspNetCoreRateLimit;
+// using AspNetCoreRateLimit;
 
 namespace Nager.Date.IntegrationTests
 {
@@ -17,6 +17,6 @@ namespace Nager.Date.IntegrationTests
         public bool? EnableIpRateLimiting { get; set; }
         public bool? EnableCors { get; set; }
         public bool? EnableSwaggerMode { get; set; }
-        public IpRateLimitOptions IpRateLimiting { get; set; }
+        // public IpRateLimitOptions IpRateLimiting { get; set; }
     }
 }

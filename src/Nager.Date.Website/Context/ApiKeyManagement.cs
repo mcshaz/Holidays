@@ -42,7 +42,7 @@ namespace Nager.Date.Website.Context
                 }
                 else
                 {
-                    AddHitByUserId(context, usrId.Value, ipBytes);
+                    _ = AddHitByUserId(context, usrId.Value, ipBytes);
                 }
                 return true;
             }

@@ -165,17 +165,16 @@ namespace Nager.Date.Website
             var enableSwaggerMode = Configuration.GetValue<bool>("EnableSwaggerMode");
 
             app.UseForwardedHeaders();
-            // if (env.IsDevelopment())
-            // {
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
-            // }
-            // else
-            // {
-            //    app.UseExceptionHandler("/Home/Error");
-            //    app.UseHsts();
-            // }
-
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

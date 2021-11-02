@@ -1,6 +1,8 @@
 ![Build status](https://github.com/nager/Nager.Date/actions/workflows/dotnet.yml/badge.svg)
 [![Build status](https://github.com/nager/Nager.Date/actions/workflows/dockerimage.yml/badge.svg)](https://hub.docker.com/r/nager/nager-date)
+This is a port of the website portion of Nager.Date which a) supports CORS requests, b) includes legacy browser support, c) serves iCalendar files in addition to JSON & CSV and d) tracks use by way of an API key e) provides an enrolled user and administrator user interface.
 
+Any issues with culture support or the holiday information itself should be fed back to the original Nager.Date repo as below:
 # :calendar: Nager.Date - [Official Website](https://date.nager.at)
 
 Nager.Date is a popular project to query holidays. We currently support over 100 countries. The project is based on .NET but provides a REST interface to retrieve the data. There are several ways to use Nager.Date, there is a public api, you can start your own docker container or you can use the nuget package.

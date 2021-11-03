@@ -1,6 +1,7 @@
 ![Build status](https://github.com/nager/Nager.Date/actions/workflows/dotnet.yml/badge.svg)
 [![Build status](https://github.com/nager/Nager.Date/actions/workflows/dockerimage.yml/badge.svg)](https://hub.docker.com/r/nager/nager-date)
-This is a port of the website portion of Nager.Date which a) supports CORS requests, b) includes legacy browser support, c) serves iCalendar files in addition to JSON & CSV and d) tracks use by way of an API key e) provides an enrolled user and administrator user interface.
+
+This is a port of the website portion of Nager.Date which a) supports CORS requests, b) includes legacy browser support, c) serves iCalendar files in addition to JSON & CSV, d) tracks use by way of an API key and e) provides an enrolled user and administrator user interface.
 
 Any issues with culture support or the holiday information itself should be fed back to the original Nager.Date repo as below:
 # :calendar: Nager.Date - [Official Website](https://date.nager.at)
